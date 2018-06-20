@@ -1,7 +1,7 @@
 # AI Gateway Setup
 Some notes on how to set up an AI gateway using the Aaeon UP Squared.
-This system can perform both IoT gateway functions (for example, acting as an IoT system
-orchestrator, resource manager, and secure access portal) and "fog computing" offload engine
+This system can perform _both_ IoT gateway functions (for example, acting as an IoT system
+orchestrator, resource manager, and secure access portal) and "fog computing" offload engine functions
 (for instance, running AI inferencing jobs supporting other local device in the network).
 
 Hardware requirements: Aaeon UP2, N4200 processor (which supports OpenCL 2.1; other variants do not),

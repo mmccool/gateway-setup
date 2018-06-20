@@ -10,7 +10,7 @@ You probably also want a WiFi card and antennas, and if you want AI hardware acc
 
 It will look something like this without a case:
 
-![UP2 AI Gateway](images/inside.jpg)
+![UP2 AI Gateway](images/inside2.jpg)
 
 Put a nice case on it and it looks like this:
 

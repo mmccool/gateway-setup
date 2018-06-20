@@ -1,11 +1,20 @@
-# AI/IoT Gateway/Fog Node Setup
-Some notes on how to set up an AI/IoT gateway/fog node using the Aaeon UP Squared.
+# AI Gateway Setup
+Some notes on how to set up an AI gateway using the Aaeon UP Squared.
+This system can perform both IoT gateway functions (for example, acting as an IoT system
+orchestrator, resource manager, and secure access portal) and "fog computing" offload engine
+(for instance, running AI inferencing jobs supporting other local device in the network).
 
 Hardware requirements: Aaeon UP2, N4200 processor (which supports OpenCL 2.1; other variants do not),
 min 4GB RAM, min 32GB of EMMC (64GB recommended).
 You probably also want a WiFi card and antennas, and if you want AI hardware acceleration, the AI Core PCIe card.
+
+It will look something like this without a case:
+
+![UP2 AI Gateway](images/inside.jpg)
+
 Put a nice case on it and it looks like this:
-![UP2 AI Gateway](images/UP2_gateway.jpg)
+
+![UP2 AI Gateway](images/outside.jpg)
 
 ## OS Installation
 1. Install Ubuntu Server 16.04.4, 64-bit version
@@ -19,9 +28,11 @@ Put a nice case on it and it looks like this:
    sudo apt-get dist-upgrade
    sudo reboot
    ```
-3. To support HW, install UP2 kernel as described here:
+3. To support HW,
+   [install UP2 kernel](
        http://wiki.up-community.org/Ubuntu
-     including upboard-extras and groups.
+   )
+   including upboard-extras and groups.
 
 ## Networking Setup
 1. To support mDNS, install `avahi-daemon`
@@ -59,10 +70,9 @@ Put a nice case on it and it looks like this:
 
 ## Setup GUI: Minimal X Windows (for VNC and occasional direct use)
 1. Install OpenBox (minimal X window manager; about 380MB)
-   The following allows for a GUI but with the minimum use of storage
-   See the following for more information on a similar configuration: 
+   The following [allows for a GUI but with the minimum use of storage](
        https://www.addictivetips.com/ubuntu-linux-tips/desktop-environment-with-openbox-window-manager/
-   Summary:
+   )
    ```
    sudo apt install xinit openbox tint2 pcmanfm
    ```
@@ -98,20 +108,23 @@ Put a nice case on it and it looks like this:
 8. Configure panel (Optional, just for convenience).
    Click on the button down at the lower left to configure the panel.  For example, you can
    add launchers for `gnome-terminal`, `chromium` (or whatever web browser you picked), and the file manager `pcmanfm`.
-7. Install TurboVNC.
-   Follow the instructions at 
+7. Install [TurboVNC](
        https://github.com/otcshare/ros-fetchbot/blob/master/sawr_master/VNC.md   
-   this will start an remote X server on demand, using the defaults you set above.
+   ).
+   This will start an offscreen X server on demand, using the defaults you set above.
 
 ## Setup Development Tools
 1. Install build tools
    ```
    sudo apt-get install build-essential git llvm clang g++ cmake scons
    ```
-2. Install Docker CE
+2. Install [Docker CE](
        https://docs.docker.com/install/linux/docker-ce/ubuntu/
-   including post-install steps: non-sudo access, systemd daemon autostart, disable dnsmasq, cgroup limits
-       https://docs.docker.com/install/linux/linux-postinstall/
+   )
+   including [post-install steps](
+          https://docs.docker.com/install/linux/linux-postinstall/
+   ): non-sudo access, systemd daemon autostart, disable dnsmasq, cgroup limits
+
 3. Install nodejs (version 6):
    ```
    cd ~
@@ -129,15 +142,19 @@ Note: these take a LOT of space; 16GB+.  The reason for the minimal GUI install 
 make room for this.  Even so the final system just barely fits (disk at 92%) on a gateway with 32GB.
 A 64GB system would be better, and forget about using a 16GB system.  You can save a little space 
 (resulting in only 80% disk usage) by omitting the 32-bit versions of the libraries.
-1. Download IPP, MKL, TBB, and DAAL from
+1. Download [IPP, MKL, TBB, and DAAL](
        https://software.intel.com/en-us/performance-libraries
+   ).
    Unpack and install.
-2. Download OpenCL Drivers and SDK and install:
+2. Download [OpenCL Drivers](
        https://software.intel.com/en-us/articles/opencl-drivers
+   ) and [SDK](
        https://software.intel.com/en-us/intel-opencl/download
+   ) and install.
    In order to benefit from this with OpenVINO, you need hardware that
    can support OpenCL 2.1.  For example, the N4200 version of the UP2 does... but
    the CHD on the UP Board does not, and lower-end versions of the UP2 may not.
-3. Download and install OpenVINO:
+3. Download and install [OpenVINO](
       https://software.intel.com/en-us/openvino-toolkit
+   ).
 

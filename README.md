@@ -17,22 +17,28 @@ Put a nice case on it and it looks like this:
 ![UP2 AI Gateway](images/outside.jpg)
 
 ## OS Installation
-1. Install Ubuntu Server 16.04.4, 64-bit version
-     If select OpenSSH during install, can skip step 3.1.
-     In the following, assume machine is called "gateway".
-     Substitute a different name as appropriate.
-2. Update 
+1. Install Ubuntu Server 16.04.4, 64-bit version.
+   This assumes you only have a 32GB gateway and want to install the minimal GUI manually (see below).
+   If you have a 64GB gateway you might want to install Desktop Ubuntu instead and skip the minimal
+   GUI installation.
+   Assuming you do install Ubuntu server, if you select OpenSSH during the install, you can skip step 3.1.
+   In the following, I assume the machine is called `gateway`.
+   Substitute a different name as appropriate.
+2. Update respository, packages, and distribution.  Reboot.
    ```
    sudo apt-get update
    sudo apt-get upgrade
    sudo apt-get dist-upgrade
    sudo reboot
    ```
-3. To support HW,
+3. To support HW, including I2C, SPI, etc,
    [install UP2 kernel](
        http://wiki.up-community.org/Ubuntu
    )
-   including upboard-extras and groups.
+   including upboard-extras and groups.   Note: the standard UP2 case shown in the picture above does not
+   provide external access to these ports, although you can run cables through the "extra" antenna ports.
+   If you don't plan to use these ports you can probably skip this step, although for security reasons
+   (eg getting the benefit of Spectre and Meltdown fixes) you may want to set up your system to track the HWE kernel.
 
 ## Networking Setup
 1. To support mDNS, install `avahi-daemon`
